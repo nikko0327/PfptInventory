@@ -2,8 +2,13 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
 
-// GET route for getting and reading data
+//GET route for reading data
 router.get("/", function(req, res, next){
+	res.render("login");
+});
+
+// POST route for updating data
+router.post("/", function(req, res, next){
 	//confirm that user typed same password 2 times.
 	if(req.body.password !== req.body.passwordConf){
 		var err = new Error("Password don't match!");
@@ -82,4 +87,4 @@ router.get("/logout", function(req, res, next){
 	}
 });
 
-module.exports =router;
+module.exports = router;

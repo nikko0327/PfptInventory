@@ -36,9 +36,14 @@ app.use(bodyParser.json());
 // used so we can get data from forms and etc.
 app.use(bodyParser.urlencoded({extended: false}));
 
+//so we don't have to type .ejs
+app.set("view engine", "ejs");
+
+app.use(express.static(__dirname + "/public"));
+
 //including routes. Seperating the routes to different file, so it will be cleaner.
 var routes = require("./routes/router");
-//app.use("/", routes); Deprecated
+app.use(routes);
 
 //catch 404 and forward to error handler
 app.use(function(){
