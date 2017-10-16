@@ -9,6 +9,12 @@ var User = require("../models/user");
 	var importInvCustomerTest = "/Users/nlee/Desktop/importInvCustomerTest.csv";
 	var statusStores = "/Users/nlee/Desktop/awtoolsStatusStores.csv";
 
+	var AW_IP = [];
+	var AW_STATUS =[];
+	var CUST_GUID = [];
+	var CUST_NAME = [];
+	var MSG_COUNT = [];
+
 
 	var statusAllContent = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
 	var parsed = Papa.parse(statusAllContent);
@@ -34,6 +40,13 @@ var User = require("../models/user");
 				}
 			}
 			console.log("AW: " + storeData[i][0] + " | Customer GUID: " + storeData[i][1] + " | STATAW: " + AW + " | Status: " + status + " |  Message Count: " + messageCount);
+			
+			//Adding values to an array for ejs to pickup and parse
+			AW_IP.push(storeData[i][0]);
+			AW_STATUS.push(status);
+			CUST_GUID.push(storeData[i][1]);
+			MSG_COUNT.push(messageCount);
+
 			i = i + 2;
 		}
 //TEST
@@ -105,7 +118,7 @@ router.get("/index", function(req, res, next){
 			} else{
 				//CHANGE TO res.render
 				//return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
-				res.render("index");
+				res.render("index", {AW_IP: AW_IP, AW_STATUS: AW_STATUS, CUST_GUID: CUST_GUID, MSG_COUNT: MSG_COUNT});
 			}
 		}
 	});
