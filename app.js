@@ -34,7 +34,7 @@ app.use(session({
 //parsing incoming requests
 app.use(bodyParser.json());
 // used so we can get data from forms and etc.
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //so we don't have to type .ejs
 app.set("view engine", "ejs");
