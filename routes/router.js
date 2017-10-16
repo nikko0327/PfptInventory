@@ -20,10 +20,11 @@ router.post("/", function(req, res, next){
 	if(req.body.email &&
 		req.body.username &&
 		req.body.password &&
-		re.body.passwordConf){
+		req.body.passwordConf){
 
 		var userData = {
-			email: req.body.username,
+			email: req.body.email,
+			username: req.body.username,
 			password: req.body.password,
 			passwordConf: req.body.passwordConf,
 		}
