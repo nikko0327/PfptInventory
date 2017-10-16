@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nikko0327/PfptInventory#readme",
   "dependencies": {
+    "babyparse": "^0.4.6",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.0",

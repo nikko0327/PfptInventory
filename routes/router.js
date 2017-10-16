@@ -2,6 +2,42 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
 
+// TEST
+	var Papa = require("babyparse");
+	var fs = require("fs");
+	var awtoolsStatusAll = "/Users/nlee/Desktop/awtoolsStatusAll.csv";
+	var importInvCustomerTest = "/Users/nlee/Desktop/importInvCustomerTest.csv";
+	var statusStores = "/Users/nlee/Desktop/awtoolsStatusStores.csv";
+
+
+	var statusAllContent = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
+	var parsed = Papa.parse(statusAllContent);
+	statData = parsed.data;
+
+	var customerContent = fs.readFileSync(importInvCustomerTest, { encoding: 'utf8' });
+	var parsed = Papa.parse(customerContent);
+	custData = parsed.data;
+
+	var storeContent = fs.readFileSync(statusStores, { encoding: 'utf8' });
+	var parsed = Papa.parse(storeContent);
+	storeData = parsed.data;
+
+	var AW = "";
+	var status = "";
+	var messageCount = "";
+		for(var i = 1; i < storeData.length; i++){
+			for(var j = 1; j < statData.length; j++){
+				if(storeData[i][0] == statData[j][0]){
+					AW = statData[j][0];
+					status = statData[j][1];
+					messageCount = statData[j][7];
+				}
+			}
+			console.log("AW: " + storeData[i][0] + " | Customer GUID: " + storeData[i][1] + " | STATAW: " + AW + " | Status: " + status + " |  Message Count: " + messageCount);
+			i = i + 2;
+		}
+//TEST
+
 //GET route for reading data
 router.get("/", function(req, res, next){
 	res.render("login");
@@ -68,7 +104,8 @@ router.get("/index", function(req, res, next){
 				return next(err);
 			} else{
 				//CHANGE TO res.render
-				return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
+				//return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
+				res.render("index");
 			}
 		}
 	});
