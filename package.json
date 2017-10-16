@@ -1,0 +1,26 @@
+{
+  "name": "pfptinventory",
+  "version": "1.0.0",
+  "description": "PFPT Professional Services - Inventory Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikko0327/PfptInventory.git"
+  },
+  "author": "Nikko Lee <nlee@proofpoint.com | nikko.lee88@yahoo.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikko0327/PfptInventory/issues"
+  },
+  "homepage": "https://github.com/nikko0327/PfptInventory#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-sanitizer": "^1.0.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.12.2"
+  }
+}
