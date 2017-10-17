@@ -2,8 +2,13 @@
 <div class="ui container">
 	<br>
 	<br>
-	<table class="ui fixed striped green sortable table">
+  <br>
+	<table id="table" class="ui fixed striped green sortable table">
   <thead>
+    <div class="ui search">
+      <input id="search" class="prompt" type="search" placeholder="Search...">
+    <div class="results"></div>
+  </div>
     <tr>
     	<th class="two wide sorted ascending">AW</th>
    		<th class="two wide">Status</th>
@@ -27,6 +32,7 @@
 }); %>
   </tbody>
 </table>	
+<script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
 </div>
 
 <% include partials/footer %>
