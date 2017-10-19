@@ -5,9 +5,9 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	var awtoolsStatusAll = "../logs/awtoolsStatusAll.txt";
+	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
 	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolsStatusStores.txt";
+	var statusStores = "../logs/awtoolStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
