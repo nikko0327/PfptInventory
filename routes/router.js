@@ -14,6 +14,12 @@ var User = require("../models/user");
 	var CUST_GUID = [];
 	var CUST_NAME = [];
 	var MSG_COUNT = [];
+	var BLOB_REPLICATION = [];
+	var BLOB_LTS = [];
+	var INDEX_REPLICATION = [];
+	var INDEX_LTS = [];
+	var STRUCTURE_REPLICATION = [];
+	var STRUCTURE_LTS = [];
 
 
 	var statusAllContent = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
@@ -37,6 +43,13 @@ var User = require("../models/user");
 					AW = statData[j][0];
 					status = statData[j][1];
 					messageCount = statData[j][7];
+
+					BLOB_REPLICATION.push(statData[j][17]);
+					BLOB_LTS.push(statData[j][18]);
+					INDEX_REPLICATION.push(statData[j][19]);
+					INDEX_LTS.push(statData[j][20]);
+					STRUCTURE_REPLICATION.push(statData[j][21]);
+					STRUCTURE_LTS.push(statData[j][22]);
 				}
 			}
 			console.log("AW: " + storeData[i][0] + " | Customer GUID: " + storeData[i][1] + " | STATAW: " + AW + " | Status: " + status + " |  Message Count: " + messageCount);
@@ -118,7 +131,7 @@ router.get("/index", function(req, res, next){
 			} else{
 				//CHANGE TO res.render
 				//return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
-				res.render("index", {AW_IP: AW_IP, AW_STATUS: AW_STATUS, CUST_GUID: CUST_GUID, MSG_COUNT: MSG_COUNT});
+				res.render("index", {AW_IP: AW_IP, AW_STATUS: AW_STATUS, CUST_GUID: CUST_GUID, MSG_COUNT: MSG_COUNT, BLOB_REPLICATION: BLOB_REPLICATION, BLOB_LTS: BLOB_LTS, INDEX_REPLICATION: INDEX_REPLICATION, INDEX_LTS: INDEX_LTS, STRUCTURE_REPLICATION: STRUCTURE_REPLICATION, STRUCTURE_LTS: STRUCTURE_LTS});
 			}
 		}
 	});

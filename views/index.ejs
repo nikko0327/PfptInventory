@@ -1,37 +1,49 @@
 <% include partials/header %>
-<div class="ui container">
-	<br>
-	<br>
+<div class="ui">
   <br>
-	<table id="table" class="ui fixed striped green sortable table">
+  <br>
+  <br>
+  <table id="table" class="ui fixed striped green sortable table">
   <thead>
     <div class="ui search">
       <input id="search" class="prompt" type="search" placeholder="Search...">
     <div class="results"></div>
   </div>
     <tr>
-    	<th class="two wide sorted ascending">AW</th>
-   		<th class="two wide">Status</th>
-    	<th class="four wide">Customer GUID</th>
-    	<th class="two wide">Customer Name</th>
-    	<th class="two wide">Message Count</th>
+      <th class="two wide sorted ascending">AW</th>
+      <th class="two wide">Status</th>
+      <th class="four wide">Customer GUID</th>
+      <th class="two wide">Customer Name</th>
+      <th class="two wide">Message Count</th>
+      <th class="two wide">Blob Replication</th>
+      <th class="two wide">Blob LTS</th>
+      <th class="two wide">Index Replication</th>
+      <th class="two wide">Index LTS</th>
+      <th class="two wide">Structure Replication</th>
+      <th class="two wide">Structure LTS</th>
   </tr></thead>
   <tbody>
-  	<% 
-  	var i = 0;
-  	AW_IP.forEach(function(AW_IP){ %>
+    <% 
+    var i = 0;
+    AW_IP.forEach(function(AW_IP){ %>
     <tr>
       <td><%= AW_IP %></td>
       <td><%= AW_STATUS[i] %></td>
       <td><%= CUST_GUID[i] %></td>
       <td>Customer</td>
       <td><%= MSG_COUNT[i] %></td>
+      <td><%= BLOB_REPLICATION[i] %></td>
+      <td><%= BLOB_LTS[i] %></td>
+      <td><%= INDEX_REPLICATION[i] %></td>
+      <td><%= INDEX_LTS[i] %></td>
+      <td><%= STRUCTURE_REPLICATION[i] %></td>
+      <td><%= STRUCTURE_LTS[i] %></td>
     </tr>
     <% 
     i++;
 }); %>
   </tbody>
-</table>	
+</table>  
 <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script>
 </div>
 
