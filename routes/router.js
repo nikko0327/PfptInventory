@@ -5,9 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolStatusStores.txt";
+	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	// var statusStores = "../logs/awtoolStatusStores.txt";
+
+	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	var importInvCustomerTest = "tempFile/importInvCustomerTest.txt";
+	var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -34,34 +38,69 @@ var User = require("../models/user");
 	var parsed = Papa.parse(storeContent);
 	storeData = parsed.data;
 
-	var AW = "";
-	var status = "";
-	var messageCount = "";
-		for(var i = 1; i < storeData.length; i++){
-			for(var j = 1; j < statData.length; j++){
-				if(storeData[i][0] == statData[j][0]){
-					AW = statData[j][0];
-					status = statData[j][1];
-					messageCount = statData[j][7];
+	// var AW = "";
+	// var status = "";
+	// var messageCount = "";
+	// 	for(var i = 1; i < storeData.length; i++){
+	// 		for(var j = 1; j < statData.length; j++){
+	// 			if(storeData[i][0] == statData[j][0]){
+	// 				AW = statData[j][0];
+	// 				status = statData[j][1];
+	// 				messageCount = statData[j][7];
 
-					BLOB_REPLICATION.push(statData[j][17]);
-					BLOB_LTS.push(statData[j][18]);
-					INDEX_REPLICATION.push(statData[j][19]);
-					INDEX_LTS.push(statData[j][20]);
-					STRUCTURE_REPLICATION.push(statData[j][21]);
-					STRUCTURE_LTS.push(statData[j][22]);
+	// 				BLOB_REPLICATION.push(statData[j][17]);
+	// 				BLOB_LTS.push(statData[j][18]);
+	// 				INDEX_REPLICATION.push(statData[j][19]);
+	// 				INDEX_LTS.push(statData[j][20]);
+	// 				STRUCTURE_REPLICATION.push(statData[j][21]);
+	// 				STRUCTURE_LTS.push(statData[j][22]);
+	// 			}
+	// 		}
+	// 		console.log("AW: " + storeData[i][0] + " | Customer GUID: " + storeData[i][1] + " | STATAW: " + AW + " | Status: " + status + " |  Message Count: " + messageCount);
+			
+	// 		//Adding values to an array for ejs to pickup and parse
+	// 		AW_IP.push(storeData[i][0]);
+	// 		AW_STATUS.push(status);
+	// 		CUST_GUID.push(storeData[i][1]);
+	// 		MSG_COUNT.push(messageCount);
+
+	// 		i = i + 2;
+	// 	}
+
+	var AW = "";
+var status = "";
+var messageCount = "";
+for(var i = 1; i < statData.length; i++){
+	//console.log("IP: " + statData[i][0] + " | Status: " + statData[i][1] + " | Message Count: " + statData[i][7] + "| BOLB REPL: " + statData[i][17] + " | BLOB LTS: " + statData[i][18]
+	//	+ " | Index REPL: " + statData[i][19] + "| Index LTS: " + statData[i][20] + " | Structure REPL" + statData[i][21] + " | Structure LTS: " + statData[i][22]);
+
+	for(var j = 1; j < storeData.length; j++){
+		if(statData[i][0] === storeData[j][0]){
+			// console.log("StatusAll: " + statData[i][0] + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1]);
+			CUST_GUID.push(storeData[j][1]);
+			for(var k = 0; k < custData.length; k++){
+				if(storeData[j][1] === custData[k][0].replace(" ", "")){
+					//console.log(custData[k][1]);
+					console.log("StatusAll: " + statData[i][0] + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1] + " | Customer Name: " + custData[k][1]);
+					CUST_NAME.push(custData[k][1]);
 				}
 			}
-			console.log("AW: " + storeData[i][0] + " | Customer GUID: " + storeData[i][1] + " | STATAW: " + AW + " | Status: " + status + " |  Message Count: " + messageCount);
-			
-			//Adding values to an array for ejs to pickup and parse
-			AW_IP.push(storeData[i][0]);
-			AW_STATUS.push(status);
-			CUST_GUID.push(storeData[i][1]);
-			MSG_COUNT.push(messageCount);
-
-			i = i + 2;
+			break;
 		}
+	}
+
+	AW_IP.push(statData[i][0]);
+	AW_STATUS.push(statData[i][1]);
+	MSG_COUNT.push(statData[i][7]);
+	BLOB_REPLICATION.push(statData[i][17]);
+	BLOB_LTS.push(statData[i][18]);
+	INDEX_REPLICATION.push(statData[i][19]);
+	INDEX_LTS.push(statData[i][20]);
+	STRUCTURE_REPLICATION.push(statData[i][21]);
+	STRUCTURE_LTS.push(statData[i][22]);
+}
+
+
 //TEST
 
 //GET route for reading data
@@ -131,7 +170,7 @@ router.get("/index", function(req, res, next){
 			} else{
 				//CHANGE TO res.render
 				//return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
-				res.render("index", {AW_IP: AW_IP, AW_STATUS: AW_STATUS, CUST_GUID: CUST_GUID, MSG_COUNT: MSG_COUNT, BLOB_REPLICATION: BLOB_REPLICATION, BLOB_LTS: BLOB_LTS, INDEX_REPLICATION: INDEX_REPLICATION, INDEX_LTS: INDEX_LTS, STRUCTURE_REPLICATION: STRUCTURE_REPLICATION, STRUCTURE_LTS: STRUCTURE_LTS});
+				res.render("index", {AW_IP: AW_IP, AW_STATUS: AW_STATUS, CUST_GUID: CUST_GUID, CUST_NAME: CUST_NAME, MSG_COUNT: MSG_COUNT, BLOB_REPLICATION: BLOB_REPLICATION, BLOB_LTS: BLOB_LTS, INDEX_REPLICATION: INDEX_REPLICATION, INDEX_LTS: INDEX_LTS, STRUCTURE_REPLICATION: STRUCTURE_REPLICATION, STRUCTURE_LTS: STRUCTURE_LTS});
 			}
 		}
 	});
