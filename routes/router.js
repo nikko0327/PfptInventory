@@ -5,13 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	// var statusStores = "../logs/awtoolStatusStores.txt";
+	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	var statusStores = "../logs/awtoolStatusStores.txt";
 
-	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	var importInvCustomerTest = "tempFile/importInvCustomerTest.txt";
-	var statusStores = "tempFile/awtoolsStatusStores.txt";
+	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	// var importInvCustomerTest = "tempFile/importInvCustomerTest.txt";
+	// var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -80,7 +80,6 @@ for(var i = 1; i < statData.length; i++){
 			CUST_GUID.push(storeData[j][1]);
 			for(var k = 0; k < custData.length; k++){
 				if(storeData[j][1] === custData[k][0].replace(" ", "")){
-					//console.log(custData[k][1]);
 					console.log("StatusAll: " + statData[i][0] + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1] + " | Customer Name: " + custData[k][1]);
 					CUST_NAME.push(custData[k][1]);
 				}
@@ -92,11 +91,11 @@ for(var i = 1; i < statData.length; i++){
 	AW_IP.push(statData[i][0]);
 	AW_STATUS.push(statData[i][1]);
 	MSG_COUNT.push(statData[i][7]);
-	BLOB_REPLICATION.push(statData[i][17]);
+	BLOB_REPLICATION.push(statData[i][17].substring(9));
 	BLOB_LTS.push(statData[i][18]);
-	INDEX_REPLICATION.push(statData[i][19]);
+	INDEX_REPLICATION.push(statData[i][19].substring(9));
 	INDEX_LTS.push(statData[i][20]);
-	STRUCTURE_REPLICATION.push(statData[i][21]);
+	STRUCTURE_REPLICATION.push(statData[i][21].substring(9));
 	STRUCTURE_LTS.push(statData[i][22]);
 }
 
