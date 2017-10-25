@@ -91,11 +91,11 @@ for(var i = 1; i < statData.length; i++){
 	AW_IP.push(statData[i][0]);
 	AW_STATUS.push(statData[i][1]);
 	MSG_COUNT.push(statData[i][7]);
-	BLOB_REPLICATION.push(statData[i][17].substring(9, statData.length);
+	BLOB_REPLICATION.push(statData[i][17]);
 	BLOB_LTS.push(statData[i][18]);
-	INDEX_REPLICATION.push(statData[i][19].substring(9, statData.length));
+	INDEX_REPLICATION.push(statData[i][19]);
 	INDEX_LTS.push(statData[i][20]);
-	STRUCTURE_REPLICATION.push(statData[i][21].substring(9, statData.length));
+	STRUCTURE_REPLICATION.push(statData[i][21]);
 	STRUCTURE_LTS.push(statData[i][22]);
 }
 
