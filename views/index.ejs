@@ -40,7 +40,11 @@
       <% }else{ %>
         <td style="color: green;"><%= MSG_COUNT[i] %></td>
       <% } %>
-      <td><%= BLOB_REPLICATION[i] %></td>
+      <% if(BLOB_REPLICATION[i].length > 9){ %>
+      <td><%= BLOB_REPLICATION[i].substring(9) %></td>
+      <% }else{ %>
+        <td><%= BLOB_REPLICATION[i] %></td>
+      <% } %>
       <td><%= BLOB_LTS[i] %></td>
       <td><%= INDEX_REPLICATION[i] %></td>
       <td><%= INDEX_LTS[i] %></td>

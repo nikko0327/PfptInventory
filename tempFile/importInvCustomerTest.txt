@@ -1,4 +1,4 @@
- 1_01da3f4774c4f97a__25383af3_14a54d3f93a__8000	IBC_Bank
+1_01da3f4774c4f97a__25383af3_14a54d3f93a__8000	IBC_Bank
  1_03307da94f7c6e3a_353d78d_14cd83d0510__8000	Southern_Regional_Technical_College
  1_062626d6e3c71c34_7bd3356b_1419df5343e__8000	Gowlings
  1_07bc5a8fe313e647__7432a5c5_15d84bf8172__8000	skechers
@@ -16,7 +16,7 @@
  1_0b16f2be914ff46b_134bed0_1168d3f370f__8000	Walthausen_And_Co
  1_0b16f2be914ff46b_134bed0_116a5d341a8__8000	Garver_Group
  1_0b16f2be914ff46b_134bed0_116b108c824__8000	Newspaper_National_Network
- 1_0b16f2be914ff46b_134bed0_116ca11e943__8000	Alberta_Ingenuity_Fund															
+ 1_0b16f2be914ff46b_134bed0_116ca11e943__8000	Alberta_Ingenuity_Fund
  1_0b16f2be914ff46b_134bed0_116edd0539f__8000	Cardworks
  1_0b16f2be914ff46b_134bed0_116fd8bb687__8000	Sephora
  1_0b16f2be914ff46b_134bed0_1175ac490bd__8000	State_Super_Financial_Services
