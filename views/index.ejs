@@ -46,9 +46,17 @@
         <td>N/A</td>
       <% } %>
       <td><%= BLOB_LTS[i] %></td>
-      <td><%= INDEX_REPLICATION[i] %></td>
+      <% if(INDEX_REPLICATION[i] !== "N/A"){ %>
+      <td><%= INDEX_REPLICATION[i].substring(9) %></td>
+      <% }else{ %>
+        <td>N/A</td>
+      <% } %>
       <td><%= INDEX_LTS[i] %></td>
-      <td><%= STRUCTURE_REPLICATION[i] %></td>
+      <% if(STRUCTURE_REPLICATION[i] !== "N/A"){ %>
+      <td><%= STRUCTURE_REPLICATION[i].substring(9) %></td>
+      <% }else{ %>
+        <td>N/A</td>
+      <% } %>
       <td><%= STRUCTURE_LTS[i] %></td>
     </tr>
     <% 
