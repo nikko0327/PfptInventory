@@ -3,7 +3,7 @@
   <br>
   <br>
   <br>
-  <table id="table" class="ui fixed striped green sortable table">
+  <table id="table" class="ui fixed striped green sortable selectable small table">
   <thead>
     <div class="ui search">
       <input id="search" class="prompt" type="search" placeholder="Search...">
@@ -31,7 +31,15 @@
       <td><%= AW_STATUS[i] %></td>
       <td><%= CUST_GUID[i] %></td>
       <td><%= CUST_NAME[i] %></td>
-      <td><%= MSG_COUNT[i] %></td>
+
+      <% if(MSG_COUNT[i] >= 4000000){ %>
+
+      <td style="color: red;"><%= MSG_COUNT[i] %></td>
+      <% }else if(MSG_COUNT[i] < 4000000 && MSG_COUNT[i] >= 3500000){ %>
+        <td style="color: orange;"><%= MSG_COUNT[i] %></td>
+      <% }else{ %>
+        <td style="color: green;"><%= MSG_COUNT[i] %></td>
+      <% } %>
       <td><%= BLOB_REPLICATION[i] %></td>
       <td><%= BLOB_LTS[i] %></td>
       <td><%= INDEX_REPLICATION[i] %></td>
