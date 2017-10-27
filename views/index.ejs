@@ -40,10 +40,10 @@
       <% }else{ %>
         <td style="color: green;"><%= MSG_COUNT[i] %></td>
       <% } %>
-      <% if(BLOB_REPLICATION[i] != "undefined"){ %>
+      <% if(BLOB_REPLICATION[i] !== "N/A"){ %>
       <td><%= BLOB_REPLICATION[i].substring(9) %></td>
       <% }else{ %>
-        <td><%= BLOB_REPLICATION[i] %></td>
+        <td>N/A</td>
       <% } %>
       <td><%= BLOB_LTS[i] %></td>
       <td><%= INDEX_REPLICATION[i] %></td>
