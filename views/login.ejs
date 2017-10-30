@@ -32,8 +32,11 @@ Author: Nikko Lee <nlee@proofpoint.com | nikko.lee88@yahoo.com>
 
         <style type="text/css">
             
-            body {
-    background-color: white;
+body {
+    /*background-color: white;*/
+    background: #085078;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #85D8CE, #085078);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #85D8CE, #085078); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #loginbox {
@@ -189,18 +192,39 @@ Author: Nikko Lee <nlee@proofpoint.com | nikko.lee88@yahoo.com>
  */
 function(){for(var a=0,b=["ms","moz","webkit","o"],c=0;c<b.length&&!window.requestAnimationFrame;++c)window.requestAnimationFrame=window[b[c]+"RequestAnimationFrame"],window.cancelAnimationFrame=window[b[c]+"CancelAnimationFrame"]||window[b[c]+"CancelRequestAnimationFrame"];window.requestAnimationFrame||(window.requestAnimationFrame=function(b){var c=(new Date).getTime(),d=Math.max(0,16-(c-a)),e=window.setTimeout(function(){b(c+d)},d);return a=c+d,e}),window.cancelAnimationFrame||(window.cancelAnimationFrame=function(a){clearTimeout(a)})}();
 
+// $(function(){
+            
+//     $('#particles').particleground({
+//         minSpeedX: 0.1,
+//         maxSpeedX: 0.7,
+//         minSpeedY: 0.1,
+//         maxSpeedY: 0.7,
+//         directionX: 'center', // 'center', 'left' or 'right'. 'center' = dots bounce off edges
+//         directionY: 'center', // 'center', 'up' or 'down'. 'center' = dots bounce off edges
+//         density: 10000, // How many particles will be generated: one particle every n pixels
+//         dotColor: '#eee',
+//         lineColor: '#eee',
+//         particleRadius: 7, // Dot size
+//         lineWidth: 1,
+//         curvedLines: true,
+//         proximity: 100, // How close two dots need to be before they join
+//         parallax: false
+//     });
+
+// });
+
 $(function(){
             
     $('#particles').particleground({
         minSpeedX: 0.1,
-        maxSpeedX: 0.7,
+        maxSpeedX: 0.4,
         minSpeedY: 0.1,
-        maxSpeedY: 0.7,
+        maxSpeedY: 0.4,
         directionX: 'center', // 'center', 'left' or 'right'. 'center' = dots bounce off edges
         directionY: 'center', // 'center', 'up' or 'down'. 'center' = dots bounce off edges
         density: 10000, // How many particles will be generated: one particle every n pixels
-        dotColor: '#eee',
-        lineColor: '#eee',
+        dotColor: '#e1e1e1',
+        lineColor: '#e1e1e1',
         particleRadius: 7, // Dot size
         lineWidth: 1,
         curvedLines: true,
