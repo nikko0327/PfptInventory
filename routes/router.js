@@ -25,8 +25,10 @@ var User = require("../models/user");
 	var STRUCTURE_REPLICATION = [];
 	var STRUCTURE_LTS = [];
 
-
-	var statusAllContent = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
+	//Removes the first 3 lines of the text file. If not, it will break the table.
+	var statusAllContent_before_deleting_top2 = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
+	var statusAllContent = statusAllContent_before_deleting_top2.replace("Logging to: /var/log/fortiva/fortiva-3.5-default-tools.log\nExecuting STATUS for 75 archive writers...\nAW,AW Status,Total,Used,Avail,% Used,Index Size,Msg Count,Queued batches,Queue status,GP Customers,LH Customers,Unregistered Customers,Start date,Capped date,Age,Store flags (Visible; Writable; Recycled; Trashed; Unregistered),Blob replication,Blob LTS,Index replication,Index LTS,Structure Replication,Structure LTS,Lookup replication,Lookup LTS\n", "");
+	console.log(statusAllContent)
 	var parsed = Papa.parse(statusAllContent);
 	statData = parsed.data;
 
