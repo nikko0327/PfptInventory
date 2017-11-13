@@ -10,7 +10,7 @@ var User = require("../models/user");
 	var statusStores = "../logs/awtoolStatusStores.txt";
 
 	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	// var importInvCustomerTest = "tempFile/importInvCustomerTest.txt";
+	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
 	// var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
