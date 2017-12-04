@@ -3,8 +3,8 @@
   <br>
   <br>
   <br>
-  <div id="filterContainer" class="container">
-    <table cellpadding="3" cellspacing="0" border="0" style="width: 30%; margin: 0 auto 2em auto;">
+  <div id="filterContainer" class="">
+    <table id="filtering" cellpadding="3" cellspacing="0" border="0" style="width: 30%; margin: 0 auto 2em auto;">
       <div id="filterHeader">
         <thead>
             <tr>
@@ -57,9 +57,18 @@
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col5_filter" placeholder="Data Center"></div></td>
             </tr>            
           </div>
-        </tbody>        
+          <div>
+            <tr id="filter_col6" class="clearFilter" data-column="5">
+              <td></td>
+              <td>
+                <button class="ui red button" onclick="clearFields()">Clear</button>
+              </td>
+            </tr>            
+          </div>
+        </tbody>       
       </div>
     </table>
+
   </div>
   <table id="table" class="ui striped green sortable selectable small table">
   <thead>

@@ -36,3 +36,7 @@ $(document).ready(function() {
         filterColumn( $(this).parents('tr').attr('data-column') );
     } );
 } );
+
+function clearFields() {
+    window.location.reload();
+}
