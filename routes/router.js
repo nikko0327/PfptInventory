@@ -5,13 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	// var statusStores = "../logs/awtoolStatusStores.txt";
+	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	var statusStores = "../logs/awtoolStatusStores.txt";
 
-	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	var statusStores = "tempFile/awtoolsStatusStores.txt";
+	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	// var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -26,11 +26,20 @@ var User = require("../models/user");
 	var STRUCTURE_LTS = [];
 
 	//Removes the first 3 lines of the text file. If not, it will break the table.
-	var statusAllContent_before_deleting_top2 = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
-	var statusAllContent = statusAllContent_before_deleting_top2.replace("Logging to: /var/log/fortiva/fortiva-3.5-default-tools.log\nExecuting STATUS for 69 archive writers...\nAW,AW Status,Total,Used,Avail,% Used,Index Size,Msg Count,Queued batches,Queue status,GP Customers,LH Customers,Unregistered Customers,Start date,Capped date,Age,Store flags (Visible; Writable; Recycled; Trashed; Unregistered),Blob replication,Blob LTS,Index replication,Index LTS,Structure Replication,Structure LTS,Lookup replication,Lookup LTS\n", "");
-	console.log(statusAllContent)
+	// var statusAllContent_before_deleting_top2 = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
+	// var statusAllContent = statusAllContent_before_deleting_top2.replace("Logging to: /var/log/fortiva/fortiva-3.5-default-tools.log\nExecuting STATUS for 69 archive writers...\nAW,AW Status,Total,Used,Avail,% Used,Index Size,Msg Count,Queued batches,Queue status,GP Customers,LH Customers,Unregistered Customers,Start date,Capped date,Age,Store flags (Visible; Writable; Recycled; Trashed; Unregistered),Blob replication,Blob LTS,Index replication,Index LTS,Structure Replication,Structure LTS,Lookup replication,Lookup LTS\n", "");
+	// console.log(statusAllContent)
+	// var parsed = Papa.parse(statusAllContent);
+	// statData = parsed.data;
+
+	//Removes the first 3 lines of the text file. If not, it will break the table.
+	var statusAllContent = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
+	statusAllContent = statusAllContent.split("\n");
+	statusAllContent.splice(0,3);
+	statusAllContent = statusAllContent.join("\n");
 	var parsed = Papa.parse(statusAllContent);
 	statData = parsed.data;
+	// console.log(statusAllContent);
 
 	var customerContent = fs.readFileSync(importInvCustomerTest, { encoding: 'utf8' });
 	var parsed = Papa.parse(customerContent);
