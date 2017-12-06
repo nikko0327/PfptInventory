@@ -5,13 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolStatusStores.txt";
+	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	// var statusStores = "../logs/awtoolStatusStores.txt";
 
-	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	// var statusStores = "tempFile/awtoolsStatusStores.txt";
+	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -35,7 +35,7 @@ var User = require("../models/user");
 	//Removes the first 3 lines of the text file. If not, it will break the table.
 	var statusAllContent = fs.readFileSync(awtoolsStatusAll, { encoding: 'utf8' });
 	statusAllContent = statusAllContent.split("\n");
-	statusAllContent.splice(0,3);
+	statusAllContent.splice(0,2);
 	statusAllContent = statusAllContent.join("\n");
 	var parsed = Papa.parse(statusAllContent);
 	statData = parsed.data;
@@ -52,32 +52,50 @@ var User = require("../models/user");
 	var AW = "";
 var status = "";
 var messageCount = "";
+var defaultGUID = "";
 for(var i = 1; i < statData.length; i++){
+	if(statData[i][1] === "READY"){
+		console.log("READY:     " + statData[i][0]);
+
+					AW_IP.push(statData[i][0]);
+					AW_STATUS.push(statData[i][1]);
+					MSG_COUNT.push(statData[i][7]);
+					BLOB_REPLICATION.push(statData[i][17]);
+					BLOB_LTS.push(statData[i][18]);
+					INDEX_REPLICATION.push(statData[i][19]);
+					INDEX_LTS.push(statData[i][20]);
+					STRUCTURE_REPLICATION.push(statData[i][21]);
+					STRUCTURE_LTS.push(statData[i][22]);
+					CUST_NAME.push("OPEN");
+					CUST_GUID.push("OPEN");
+	}
 	//console.log("IP: " + statData[i][0] + " | Status: " + statData[i][1] + " | Message Count: " + statData[i][7] + "| BOLB REPL: " + statData[i][17] + " | BLOB LTS: " + statData[i][18]
 	//	+ " | Index REPL: " + statData[i][19] + "| Index LTS: " + statData[i][20] + " | Structure REPL" + statData[i][21] + " | Structure LTS: " + statData[i][22]);
-
+	// console.log("ALL IP:" + statData[i][0] + " - " + statData[i][1]);
 	for(var j = 1; j < storeData.length; j++){
 		if(statData[i][0] === storeData[j][0]){
-			CUST_GUID.push(storeData[j][1]);
+			// console.log("PART:" + statData[i][0] + " - " + storeData[j][0] + " - " + storeData[j][1] + " - " + statData[i][1]);
 			for(var k = 0; k < custData.length; k++){
 				if(storeData[j][1] === custData[k][0].replace(" ", "")){
-					// console.log("StatusAll: " + statData[i][0] + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1] + " | Customer Name: " + custData[k][1]);
+					console.log("StatusAll: " + statData[i][0] + "|STATUS: " + statData[i][1] + " | " + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1] + " | Customer Name: " + custData[k][1]);
+					
+
+					AW_IP.push(statData[i][0]);
+					AW_STATUS.push(statData[i][1]);
+					MSG_COUNT.push(statData[i][7]);
+					BLOB_REPLICATION.push(statData[i][17]);
+					BLOB_LTS.push(statData[i][18]);
+					INDEX_REPLICATION.push(statData[i][19]);
+					INDEX_LTS.push(statData[i][20]);
+					STRUCTURE_REPLICATION.push(statData[i][21]);
+					STRUCTURE_LTS.push(statData[i][22]);
 					CUST_NAME.push(custData[k][1]);
+					CUST_GUID.push(storeData[j][1]);
 				}
-			}
-			break;
+			}break;
 		}
 	}
 
-	AW_IP.push(statData[i][0]);
-	AW_STATUS.push(statData[i][1]);
-	MSG_COUNT.push(statData[i][7]);
-	BLOB_REPLICATION.push(statData[i][17]);
-	BLOB_LTS.push(statData[i][18]);
-	INDEX_REPLICATION.push(statData[i][19]);
-	INDEX_LTS.push(statData[i][20]);
-	STRUCTURE_REPLICATION.push(statData[i][21]);
-	STRUCTURE_LTS.push(statData[i][22]);
 }
 
 
