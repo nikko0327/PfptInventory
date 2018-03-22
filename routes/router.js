@@ -5,13 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolStatusStores.txt";
+	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	// var statusStores = "../logs/awtoolStatusStores.txt";
 
-	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	// var statusStores = "tempFile/awtoolsStatusStores.txt";
+	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -69,6 +69,7 @@ for(var i = 1; i < statData.length; i++){
 					CUST_NAME.push("OPEN");
 					CUST_GUID.push("OPEN");
 	}
+	// console.log(statData[i][0]);
 	//console.log("IP: " + statData[i][0] + " | Status: " + statData[i][1] + " | Message Count: " + statData[i][7] + "| BOLB REPL: " + statData[i][17] + " | BLOB LTS: " + statData[i][18]
 	//	+ " | Index REPL: " + statData[i][19] + "| Index LTS: " + statData[i][20] + " | Structure REPL" + statData[i][21] + " | Structure LTS: " + statData[i][22]);
 	// console.log("ALL IP:" + statData[i][0] + " - " + statData[i][1]);
@@ -99,12 +100,63 @@ for(var i = 1; i < statData.length; i++){
 }
 
 
-//TEST
+//FOR APPLIANCE LIST PAGE
+var applianceList = "applianceTempFile/Import_ExportList.csv";
+
+//Array for each column
+var NAME = [];
+var STATE = [];
+var STATUS = [];
+var PROVISIONED_SPACE = [];
+var USED_SPACE = [];
+var HOST_CPU = [];
+var HOST_MEM = [];
+var IP_ADDRESS = [];
+
+var appList_content = fs.readFileSync(applianceList, { encoding: 'utf8' });
+appList_content = appList_content.split("\n");
+appList_content.splice(0,1);
+appList_content = appList_content.join("\n");
+
+
+var parsed = Papa.parse(appList_content);
+statData = parsed.data;
+// console.log(statData[0,0]);
+
+for(var i = 0; i < statData.length; i++){
+	// console.log(statData[0, i][0, 0]);
+	NAME.push(statData[i][0]);
+	STATE.push(statData[i][1]);
+	STATUS.push(statData[i][2]);
+	PROVISIONED_SPACE.push(statData[i][3]);
+	USED_SPACE.push(statData[i][4]);
+	HOST_CPU.push(statData[i][5]);
+	HOST_MEM.push(statData[i][6]);
+	IP_ADDRESS.push(statData[i][7]);
+}
+
+console.log("Name Check:");
+console.log(NAME);
+console.log("End of Name Check");
+console.log(STATE);
+console.log(STATUS);
+console.log(PROVISIONED_SPACE);
+console.log(USED_SPACE);
+console.log(HOST_CPU);
+console.log(HOST_MEM);
+console.log(IP_ADDRESS);
+
+//START OF ROUTING FUNCTIONS
 
 //GET route for reading data
 router.get("/", function(req, res, next){
 	res.render("login");
 });
+
+// //GET for appliance list
+// router.get("/appliance", function(req, res, next){
+// 	res.render("appliance");
+// });
 
 // POST route for updating data
 router.post("/", function(req, res, next){
@@ -172,6 +224,11 @@ router.get("/index", function(req, res, next){
 			}
 		}
 	});
+});
+
+//GET route for appliance list
+router.get("/appliance", function(req, res, next){
+		res.render("appliance", {NAME: NAME, STATE: STATE, STATUS: STATUS, PROVISIONED_SPACE: PROVISIONED_SPACE, USED_SPACE: USED_SPACE, HOST_CPU: HOST_CPU, HOST_MEM: HOST_MEM, IP_ADDRESS: IP_ADDRESS});
 });
 
 //GET for logging out
