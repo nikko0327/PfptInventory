@@ -5,13 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolStatusStores.txt";
+	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	// var statusStores = "../logs/awtoolStatusStores.txt";
 
-	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	// var statusStores = "tempFile/awtoolsStatusStores.txt";
+	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -146,6 +146,51 @@ console.log(HOST_CPU);
 console.log(HOST_MEM);
 console.log(IP_ADDRESS);
 
+//FOR IMPORTNGHW PAGE
+
+var importngList = "tempFile/importnghw.txt"
+var importngList_content = fs.readFileSync(importngList, { encoding: 'utf8' });
+
+//Array for each column
+var FQDN = [];
+var NGIP = [];
+var PRODUCT_NAME = [];
+var ROLE = [];
+var DC = [];
+var NOTES = [];
+var DISK = [];
+var OSIMAGE = [];
+
+ obj = JSON.parse(importngList_content);
+
+console.log("-----------------------JSON START-------------------------");
+console.log(obj[0].serial_number);
+console.log(obj.length);
+
+for(var i = 0; i < obj.length; i++){
+	console.log(i + 1);
+	console.log(obj[i].serial_number);
+	FQDN.push(obj[i].fqdn);
+	NGIP.push(obj[i].ip_address);
+	PRODUCT_NAME.push(obj[i].product_name);
+	ROLE.push(obj[i].roles);
+	DC.push(obj[i].data_center_code);
+	var noteFix = obj[i].notes.slice(obj[i].notes.indexOf('[') +1,obj[i].notes.indexOf(']'));
+	NOTES.push(noteFix);
+	DISK.push(obj[i].disk_layout);
+	OSIMAGE.push(obj[i].operating_system_image);
+}
+console.log("-----------------------JSON END-------------------------");
+console.log(FQDN);
+console.log(NGIP);
+console.log(PRODUCT_NAME);
+console.log(ROLE);
+console.log(DC);
+console.log(NOTES);
+console.log(DISK);
+console.log(OSIMAGE);
+
+
 //START OF ROUTING FUNCTIONS
 
 //GET route for reading data
@@ -229,6 +274,11 @@ router.get("/index", function(req, res, next){
 //GET route for appliance list
 router.get("/appliance", function(req, res, next){
 		res.render("appliance", {NAME: NAME, STATE: STATE, STATUS: STATUS, PROVISIONED_SPACE: PROVISIONED_SPACE, USED_SPACE: USED_SPACE, HOST_CPU: HOST_CPU, HOST_MEM: HOST_MEM, IP_ADDRESS: IP_ADDRESS});
+});
+
+//GET route for ImportNG
+router.get("/importng", function(req, res, next){
+		res.render("importng", {FQDN: FQDN, NGIP: NGIP, PRODUCT_NAME: PRODUCT_NAME, ROLE: ROLE, DC: DC, NOTES: NOTES, DISK: DISK, OSIMAGE: OSIMAGE});
 });
 
 //GET for logging out
