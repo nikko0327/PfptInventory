@@ -5,13 +5,13 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	// var statusStores = "../logs/awtoolStatusStores.txt";
+	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	var statusStores = "../logs/awtoolStatusStores.txt";
 
-	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	var statusStores = "tempFile/awtoolsStatusStores.txt";
+	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	// var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -148,7 +148,8 @@ console.log(IP_ADDRESS);
 
 //FOR IMPORTNGHW PAGE
 
-var importngList = "tempFile/importnghw.txt"
+// var importngList = "tempFile/importnghw.txt"
+var importngList = "../logs/importNGHW.txt";
 var importngList_content = fs.readFileSync(importngList, { encoding: 'utf8' });
 
 //Array for each column
