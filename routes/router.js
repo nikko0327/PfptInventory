@@ -178,6 +178,7 @@ for(var i = 0; i < obj.length; i++){
 	DC.push(obj[i].data_center_code);
 	var noteFix = obj[i].notes.slice(obj[i].notes.indexOf('[') +1,obj[i].notes.indexOf(']'));
 	NOTES.push(noteFix);
+	// NOTES.push(obj[i].notes)
 	DISK.push(obj[i].disk_layout);
 	OSIMAGE.push(obj[i].operating_system_image);
 }
