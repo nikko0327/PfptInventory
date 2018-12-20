@@ -5,13 +5,35 @@ var User = require("../models/user");
 // TEST
 	var Papa = require("babyparse");
 	var fs = require("fs");
-	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolStatusStores.txt";
 
-	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	// var statusStores = "tempFile/awtoolsStatusStores.txt";
+	//TEST FOR NEW CUSTOMER LIST FORMAT
+	var newCustomerArray = [];
+	var newCustomerList = "tempFile/newCustomerList.csv";
+	var newCustomerContent = fs.readFileSync(newCustomerList, { encoding: 'utf8' });
+	
+	newCustomerContent = newCustomerContent.split("\n");
+	// newCustomerContent.splice(0,1);
+	// newCustomerContent = newCustomerContent.join("\n");
+	console.log("********************START NEW CUSTOMER LIST TESTER START*******************");
+		// for(var i = 0; i < newCustomerContent.length; i++){
+		// 	var newCustomer = newCustomerContent[i].split(" ");
+		// 	//console.log(newCustomer[newCustomer.length - 2] + " " +newCustomer[newCustomer.length - 1]);
+		// 	// console.log(newCustomerContent[i]);
+		// 	newCustomerArray[i] = newCustomer[newCustomer.length - 2] + " " +newCustomer[newCustomer.length - 1] + "\n";
+		// 	i += 1;
+		// }
+		// console.log(newCustomerArray.toString());
+	console.log("********************END NEW CUSTOMER LIST TESTER END***********************");
+
+	//END TEST FOR NEW CUSTOMER LIST FORMAT
+
+	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	// var statusStores = "../logs/awtoolStatusStores.txt";
+
+	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -54,8 +76,9 @@ var status = "";
 var messageCount = "";
 var defaultGUID = "";
 for(var i = 1; i < statData.length; i++){
+	//Display rightaway if AW state is: READY
 	if(statData[i][1] === "READY"){
-		console.log("READY:     " + statData[i][0]);
+		// console.log("READY:     " + statData[i][0]);
 
 					AW_IP.push(statData[i][0]);
 					AW_STATUS.push(statData[i][1]);
@@ -70,17 +93,18 @@ for(var i = 1; i < statData.length; i++){
 					CUST_GUID.push("OPEN");
 	}
 	// console.log(statData[i][0]);
-	//console.log("IP: " + statData[i][0] + " | Status: " + statData[i][1] + " | Message Count: " + statData[i][7] + "| BOLB REPL: " + statData[i][17] + " | BLOB LTS: " + statData[i][18]
-	//	+ " | Index REPL: " + statData[i][19] + "| Index LTS: " + statData[i][20] + " | Structure REPL" + statData[i][21] + " | Structure LTS: " + statData[i][22]);
+	// console.log("IP: " + statData[i][0] + " | Status: " + statData[i][1] + " | Message Count: " + statData[i][7] + "| BOLB REPL: " + statData[i][17] + " | BLOB LTS: " + statData[i][18]
+	// 	+ " | Index REPL: " + statData[i][19] + "| Index LTS: " + statData[i][20] + " | Structure REPL" + statData[i][21] + " | Structure LTS: " + statData[i][22]);
 	// console.log("ALL IP:" + statData[i][0] + " - " + statData[i][1]);
 	for(var j = 1; j < storeData.length; j++){
 		if(statData[i][0] === storeData[j][0]){
-			// console.log("PART:" + statData[i][0] + " - " + storeData[j][0] + " - " + storeData[j][1] + " - " + statData[i][1]);
-			for(var k = 0; k < custData.length; k++){
-				if(storeData[j][1] === custData[k][0].replace(" ", "")){
-					console.log("StatusAll: " + statData[i][0] + "|STATUS: " + statData[i][1] + " | " + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1] + " | Customer Name: " + custData[k][1]);
-					
+			for(var k = 0; k < newCustomerContent.length; k++){
+				var newCustomer = newCustomerContent[k].split(" ");
+				var newGUID = newCustomer[newCustomer.length - 2];
+				var newCustomerName = newCustomer[newCustomer.length - 1];
 
+				//Compare GUIDS
+				if(newGUID === storeData[j][1]){
 					AW_IP.push(statData[i][0]);
 					AW_STATUS.push(statData[i][1]);
 					MSG_COUNT.push(statData[i][7]);
@@ -90,10 +114,35 @@ for(var i = 1; i < statData.length; i++){
 					INDEX_LTS.push(statData[i][20]);
 					STRUCTURE_REPLICATION.push(statData[i][21]);
 					STRUCTURE_LTS.push(statData[i][22]);
-					CUST_NAME.push(custData[k][1]);
+					CUST_NAME.push(newCustomerName);
 					CUST_GUID.push(storeData[j][1]);
 				}
+				// k += 1;
 			}break;
+
+			//console.log("PART:" + statData[i][0] + " - " + storeData[j][0] + " - " + storeData[j][1] + " - " + statData[i][1]);
+			// for(var k = 0; k < newCustomerContent.length; k++){
+			// 	// console.log(newCustomer[newCustomer.length - 2]);
+			// 	 console.log(storeData[j][1]);
+			// 	if(storeData[j][1] === newCustomer[newCustomer.length - 2]){
+			// 		// console.log("StatusAll: " + statData[i][0] + "|STATUS: " + statData[i][1] + " | " + " | StoreData: " + storeData[j][0] + " | GUID: " + storeData[j][1] + " | Customer Name: " + custData[k][1]);
+			// 		console.log("IN!!!!!!!!!!!!!");
+
+					// AW_IP.push(statData[i][0]);
+					// AW_STATUS.push(statData[i][1]);
+					// MSG_COUNT.push(statData[i][7]);
+					// BLOB_REPLICATION.push(statData[i][17]);
+					// BLOB_LTS.push(statData[i][18]);
+					// INDEX_REPLICATION.push(statData[i][19]);
+					// INDEX_LTS.push(statData[i][20]);
+					// STRUCTURE_REPLICATION.push(statData[i][21]);
+					// STRUCTURE_LTS.push(statData[i][22]);
+					// CUST_NAME.push(custData[k][1]);
+					// CUST_GUID.push(storeData[j][1]);
+
+			// 		k += 1;
+			// 	}
+			// }break;
 		}
 	}
 
@@ -135,21 +184,21 @@ for(var i = 0; i < statData.length; i++){
 	IP_ADDRESS.push(statData[i][7]);
 }
 
-console.log("Name Check:");
-console.log(NAME);
-console.log("End of Name Check");
-console.log(STATE);
-console.log(STATUS);
-console.log(PROVISIONED_SPACE);
-console.log(USED_SPACE);
-console.log(HOST_CPU);
-console.log(HOST_MEM);
-console.log(IP_ADDRESS);
+// console.log("Name Check:");
+// console.log(NAME);
+// console.log("End of Name Check");
+// console.log(STATE);
+// console.log(STATUS);
+// console.log(PROVISIONED_SPACE);
+// console.log(USED_SPACE);
+// console.log(HOST_CPU);
+// console.log(HOST_MEM);
+// console.log(IP_ADDRESS);
 
 //FOR IMPORTNGHW PAGE
 
-// var importngList = "tempFile/importnghw.txt"
-var importngList = "../logs/importNGHW.txt";
+var importngList = "tempFile/importnghw.txt"
+// var importngList = "../logs/importNGHW.txt";
 var importngList_content = fs.readFileSync(importngList, { encoding: 'utf8' });
 
 //Array for each column
@@ -164,13 +213,13 @@ var OSIMAGE = [];
 
  obj = JSON.parse(importngList_content);
 
-console.log("-----------------------JSON START-------------------------");
-console.log(obj[0].serial_number);
-console.log(obj.length);
+// console.log("-----------------------JSON START-------------------------");
+// console.log(obj[0].serial_number);
+// console.log(obj.length);
 
 for(var i = 0; i < obj.length; i++){
-	console.log(i + 1);
-	console.log(obj[i].serial_number);
+	// console.log(i + 1);
+	// console.log(obj[i].serial_number);
 	FQDN.push(obj[i].fqdn);
 	NGIP.push(obj[i].ip_address);
 	PRODUCT_NAME.push(obj[i].product_name);
@@ -182,15 +231,15 @@ for(var i = 0; i < obj.length; i++){
 	DISK.push(obj[i].disk_layout);
 	OSIMAGE.push(obj[i].operating_system_image);
 }
-console.log("-----------------------JSON END-------------------------");
-console.log(FQDN);
-console.log(NGIP);
-console.log(PRODUCT_NAME);
-console.log(ROLE);
-console.log(DC);
-console.log(NOTES);
-console.log(DISK);
-console.log(OSIMAGE);
+// console.log("-----------------------JSON END-------------------------");
+// console.log(FQDN);
+// console.log(NGIP);
+// console.log(PRODUCT_NAME);
+// console.log(ROLE);
+// console.log(DC);
+// console.log(NOTES);
+// console.log(DISK);
+// console.log(OSIMAGE);
 
 
 //START OF ROUTING FUNCTIONS
