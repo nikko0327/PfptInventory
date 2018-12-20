@@ -8,7 +8,7 @@ var User = require("../models/user");
 
 	//TEST FOR NEW CUSTOMER LIST FORMAT
 	var newCustomerArray = [];
-	var newCustomerList = "tempFile/newCustomerList.csv";
+	var newCustomerList = "../logs/US2-allSearches-2018-11.csv";
 	var newCustomerContent = fs.readFileSync(newCustomerList, { encoding: 'utf8' });
 	
 	newCustomerContent = newCustomerContent.split("\n");
@@ -27,13 +27,13 @@ var User = require("../models/user");
 
 	//END TEST FOR NEW CUSTOMER LIST FORMAT
 
-	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	// var statusStores = "../logs/awtoolStatusStores.txt";
+	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	var statusStores = "../logs/awtoolStatusStores.txt";
 
-	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	var statusStores = "tempFile/awtoolsStatusStores.txt";
+	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	// var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
