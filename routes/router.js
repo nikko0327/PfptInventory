@@ -8,7 +8,8 @@ var User = require("../models/user");
 
 	//TEST FOR NEW CUSTOMER LIST FORMAT
 	var newCustomerArray = [];
-	var newCustomerList = "../logs/US2-allSearches-2018-11.csv";
+	// var newCustomerList = "../logs/US2-allSearches-2018-11.csv";
+	var newCustomerList = "tempFile/newcustomerList.csv";
 	var newCustomerContent = fs.readFileSync(newCustomerList, { encoding: 'utf8' });
 	
 	newCustomerContent = newCustomerContent.split("\n");
@@ -27,13 +28,13 @@ var User = require("../models/user");
 
 	//END TEST FOR NEW CUSTOMER LIST FORMAT
 
-	var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
-	var importInvCustomerTest = "../logs/importInvCustomer.lst";
-	var statusStores = "../logs/awtoolStatusStores.txt";
+	// var awtoolsStatusAll = "../logs/awtoolStatusAll.txt";
+	// var importInvCustomerTest = "../logs/importInvCustomer.lst";
+	// var statusStores = "../logs/awtoolStatusStores.txt";
 
-	// var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
-	// var importInvCustomerTest = "tempFile/importInvCustomer.lst";
-	// var statusStores = "tempFile/awtoolsStatusStores.txt";
+	var awtoolsStatusAll = "tempFile/awtoolsStatusAll.txt";
+	var importInvCustomerTest = "tempFile/importInvCustomer.lst";
+	var statusStores = "tempFile/awtoolsStatusStores.txt";
 
 	var AW_IP = [];
 	var AW_STATUS =[];
@@ -225,9 +226,9 @@ for(var i = 0; i < obj.length; i++){
 	PRODUCT_NAME.push(obj[i].product_name);
 	ROLE.push(obj[i].roles);
 	DC.push(obj[i].data_center_code);
-	var noteFix = obj[i].notes.slice(obj[i].notes.indexOf('[') +1,obj[i].notes.indexOf(']'));
-	NOTES.push(noteFix);
-	// NOTES.push(obj[i].notes)
+	// var noteFix = obj[i].notes.slice(obj[i].notes.indexOf('[') +1,obj[i].notes.indexOf(']'));
+	// NOTES.push(noteFix);
+	NOTES.push(obj[i].notes)
 	DISK.push(obj[i].disk_layout);
 	OSIMAGE.push(obj[i].operating_system_image);
 }
