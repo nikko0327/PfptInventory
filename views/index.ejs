@@ -1,5 +1,5 @@
 <% include partials/header %>
-<div class="ui" style="overflow: scroll;">
+<div class="ui">
   <br>
   <br>
   <br>
@@ -11,7 +11,7 @@
                 <th>Target</th>
                 <th>Search text</th>
             </tr>
-        </thead>        
+        </thead>
       </div>
       <div>
         <tbody>
@@ -19,43 +19,43 @@
             <tr id="filter_global">
                 <td>Global search</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="global_filter" id="global_filter" placeholder="Search anything..."></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col1" data-column="0">
                 <td>AW</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col0_filter" placeholder="Archive Writer"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col2" data-column="1">
                 <td>Status</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col1_filter" placeholder="Status"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col3" data-column="2">
                 <td>Customer GUID</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col2_filter" placeholder="GUID"></div></td>
-            </tr>           
+            </tr>
           </div>
           <div>
             <tr id="filter_col4" data-column="3">
                 <td>Customer Name</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col3_filter" placeholder="Customer Name"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col5" data-column="4">
                 <td>Message Count</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col4_filter" placeholder="Message Count"></div></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" data-column="5">
                 <td>Data Center</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col5_filter" placeholder="Data Center"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" class="clearFilter" data-column="5">
@@ -63,75 +63,79 @@
               <td>
                 <button class="ui red button" onclick="clearFields()">Clear</button>
               </td>
-            </tr>            
+            </tr>
           </div>
-        </tbody>       
+        </tbody>
       </div>
     </table>
 
   </div>
-  <table id="table" class="ui striped green sortable selectable small table">
-  <thead>
-    <tr>
-      <th class="two wide sorted ascending">AW</th>
-      <th class="two wide">Status</th>
-      <th class="six wide">Customer GUID</th>
-      <th class="three wide">Customer Name</th>
-      <th class="two wide">Message Count</th>
-      <th class="two wide">DC</th>
-      <th class="two wide">Blob Replication</th>
-      <th class="two wide">Blob LTS</th>
-      <th class="two wide">Index Replication</th>
-      <th class="two wide">Index LTS</th>
-      <th class="two wide">Structure Replication</th>
-      <th class="two wide">Structure LTS</th>
-  </tr></thead>
-  <tbody>
-    <% 
-    var i = 0;
-    AW_IP.forEach(function(AW_IP){ %>
-    <tr>
-      <td><%= AW_IP %></td>
-      <td><%= AW_STATUS[i] %></td>
-      <td><%= CUST_GUID[i] %></td>
-      <td><%= CUST_NAME[i] %></td>
+  <div style="overflow: scroll;">
+    <table id="table" class="ui striped green sortable selectable small table">
+    <thead>
+      <tr>
+        <th class="two wide sorted ascending">AW</th>
+        <th class="two wide">Status</th>
+        <th class="six wide">Customer GUID</th>
+        <th class="three wide">Customer Name</th>
+        <th class="two wide">Message Count</th>
+        <th class="two wide">DC</th>
+        <th class="two wide">Blob Replication</th>
+        <th class="two wide">Blob LTS</th>
+        <th class="two wide">Index Replication</th>
+        <th class="two wide">Index LTS</th>
+        <th class="two wide">Structure Replication</th>
+        <th class="two wide">Structure LTS</th>
+    </tr></thead>
+    <tbody>
+      <%
+      var i = 0;
+      AW_IP.forEach(function(AW_IP){ %>
+      <tr>
+        <td data-order="<%= i %>"><%= AW_IP %></td>
+        <td><%= AW_STATUS[i] %></td>
+        <td><%= CUST_GUID[i] %></td>
+        <td><%= CUST_NAME[i] %></td>
 
-      <% if(MSG_COUNT[i] >= 4000000){ %>
-      <td style="color: red;"><%= MSG_COUNT[i] %></td>
-      <% }else if(MSG_COUNT[i] < 4000000 && MSG_COUNT[i] >= 3500000){ %>
-        <td style="color: orange;"><%= MSG_COUNT[i] %></td>
-      <% }else{ %>
-        <td style="color: green;"><%= MSG_COUNT[i] %></td>
-      <% } %>
+        <% if(MSG_COUNT[i] >= 4000000){ %>
+        <td style="color: red;"><%= MSG_COUNT[i] %></td>
+        <% }else if(MSG_COUNT[i] < 4000000 && MSG_COUNT[i] >= 3500000){ %>
+          <td style="color: orange;"><%= MSG_COUNT[i] %></td>
+        <% }else{ %>
+          <td style="color: green;"><%= MSG_COUNT[i] %></td>
+        <% } %>
 
-      <% if(AW_IP.includes("10.104.")){ %>
-        <td>SC4</td>
-      <% }else if(AW_IP.includes("10.214.")){ %>
-        <td>FRA</td>
-      <% }else if(AW_IP.includes("10.130.")){ %>
-        <td>MARK</td>
-      <% }else{ %>
-        <td>UNKNOWN</td>
-      <% } %>
+        <% if(AW_IP.includes("10.104.")){ %>
+          <td>SC4</td>
+        <% }else if(AW_IP.includes("10.214.")){ %>
+          <td>FRA</td>
+        <% }else if(AW_IP.includes("10.130.")){ %>
+          <td>MARK</td>
+        <% }else{ %>
+          <td>UNKNOWN</td>
+        <% } %>
 
-      <td><%= BLOB_REPLICATION[i] %></td>
-      <td><%= BLOB_LTS[i] %></td>
+        <td><%= BLOB_REPLICATION[i] %></td>
+        <td><%= BLOB_LTS[i] %></td>
 
-      <td><%= INDEX_REPLICATION[i] %></td>
-      <td><%= INDEX_LTS[i] %></td>
+        <td><%= INDEX_REPLICATION[i] %></td>
+        <td><%= INDEX_LTS[i] %></td>
 
-      <td><%= STRUCTURE_REPLICATION[i] %></td>
-      <td><%= STRUCTURE_LTS[i] %></td>
-    </tr>
-    <% 
-    i++;
-}); %>
-  </tbody>
-</table>  <!-- 
+        <td><%= STRUCTURE_REPLICATION[i] %></td>
+        <td><%= STRUCTURE_LTS[i] %></td>
+      </tr>
+      <%
+      i++;
+  }); %>
+    </tbody>
+  </table>
+</div>
+<!--
 <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script> -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/ip-address.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 </div>
 
 <% include partials/footer %>

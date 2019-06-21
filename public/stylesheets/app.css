@@ -19,3 +19,8 @@
 #col5_smart{
 	visibility: hidden;
 }
+
+body {
+	max-width: 75%;
+	margin: auto;
+}

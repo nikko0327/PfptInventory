@@ -29,5 +29,6 @@
     "method-override": "^2.3.10",
     "mongoose": "^4.13.17",
     "nodemon": "^1.18.4"
-  }
+  },
+  "devDependencies": {}
 }

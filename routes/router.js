@@ -11,7 +11,7 @@ var User = require("../models/user");
 	// var newCustomerList = "../logs/US2-allSearches-2018-11.csv";
 	var newCustomerList = "tempFile/newcustomerList.csv";
 	var newCustomerContent = fs.readFileSync(newCustomerList, { encoding: 'utf8' });
-	
+
 	newCustomerContent = newCustomerContent.split("\n");
 	// newCustomerContent.splice(0,1);
 	// newCustomerContent = newCustomerContent.join("\n");
@@ -243,11 +243,24 @@ for(var i = 0; i < obj.length; i++){
 // console.log(OSIMAGE);
 
 
+function validateUser(req, res, next) {
+	if (req.session.userId) {
+		next();
+	}
+	else {
+		res.redirect("/");
+	}
+}
+
 //START OF ROUTING FUNCTIONS
 
 //GET route for reading data
 router.get("/", function(req, res, next){
 	res.render("login");
+});
+
+router.get("/register", function(req, res, next) {
+	res.render("register");
 });
 
 // //GET for appliance list
@@ -273,8 +286,7 @@ router.post("/", function(req, res, next){
 		var userData = {
 			email: req.body.email,
 			username: req.body.username,
-			password: req.body.password,
-			passwordConf: req.body.passwordConf,
+			password: req.body.password
 		}
 
 		User.create(userData, function(error, user){
@@ -304,7 +316,7 @@ router.post("/", function(req, res, next){
 })
 
 //GET route after registering as a new user
-router.get("/index", function(req, res, next){
+router.get("/index", validateUser, function(req, res, next){
 	User.findById(req.session.userId)
 	.exec(function(error, user){
 		if(error){
@@ -315,6 +327,14 @@ router.get("/index", function(req, res, next){
 				err.status = 400;
 				return next(err);
 			} else{
+				//sorts the IP addresses
+				for (var i = 0; i < AW_IP.length; i++) {
+          AW_IP[i] = AW_IP[i].substr(0, 10) + AW_IP[i].substr(10, AW_IP[i].length).padStart(3, "0");
+        }
+        AW_IP.sort();
+        for (var i = 0; i < AW_IP.length; i++) {
+          AW_IP[i] = AW_IP[i].substr(0, 10) + AW_IP[i].substr(10, AW_IP[i].length).replace(/^0+/, "");
+        }
 				//CHANGE TO res.render
 				//return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>');
 				res.render("index", {AW_IP: AW_IP, AW_STATUS: AW_STATUS, CUST_GUID: CUST_GUID, CUST_NAME: CUST_NAME, MSG_COUNT: MSG_COUNT, BLOB_REPLICATION: BLOB_REPLICATION, BLOB_LTS: BLOB_LTS, INDEX_REPLICATION: INDEX_REPLICATION, INDEX_LTS: INDEX_LTS, STRUCTURE_REPLICATION: STRUCTURE_REPLICATION, STRUCTURE_LTS: STRUCTURE_LTS});
@@ -324,12 +344,12 @@ router.get("/index", function(req, res, next){
 });
 
 //GET route for appliance list
-router.get("/appliance", function(req, res, next){
+router.get("/appliance", validateUser, function(req, res, next){
 		res.render("appliance", {NAME: NAME, STATE: STATE, STATUS: STATUS, PROVISIONED_SPACE: PROVISIONED_SPACE, USED_SPACE: USED_SPACE, HOST_CPU: HOST_CPU, HOST_MEM: HOST_MEM, IP_ADDRESS: IP_ADDRESS});
 });
 
 //GET route for ImportNG
-router.get("/importng", function(req, res, next){
+router.get("/importng", validateUser, function(req, res, next){
 		res.render("importng", {FQDN: FQDN, NGIP: NGIP, PRODUCT_NAME: PRODUCT_NAME, ROLE: ROLE, DC: DC, NOTES: NOTES, DISK: DISK, OSIMAGE: OSIMAGE});
 });
 

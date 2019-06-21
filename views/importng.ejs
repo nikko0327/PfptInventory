@@ -1,5 +1,5 @@
 <% include partials/header %>
-<div class="ui" style="overflow: scroll;">
+<div class="ui">
   <br>
   <br>
   <br>
@@ -11,7 +11,7 @@
                 <th>Target</th>
                 <th>Search text</th>
             </tr>
-        </thead>        
+        </thead>
       </div>
       <div>
         <tbody>
@@ -19,55 +19,55 @@
             <tr id="filter_global">
                 <td>Global search</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="global_filter" id="global_filter" placeholder="Search anything..."></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col0" data-column="0">
                 <td>Name/FQDN</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col0_filter" placeholder="Name/FQDN"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col1" data-column="1">
                 <td>IP Address</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col1_filter" placeholder="IP Adress"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col2" data-column="2">
                 <td>Product Name</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col2_filter" placeholder="Product Name"></div></td>
-            </tr>           
+            </tr>
           </div>
           <div>
             <tr id="filter_col3" data-column="3">
                 <td>Role</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col3_filter" placeholder="Role"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col4" data-column="4">
                 <td>Data Center</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col4_filter" placeholder="Data Center"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col5" data-column="5">
                 <td>Notes</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col5_filter" placeholder="Notes"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" data-column="6">
                 <td>Disk Layout</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col6_filter" placeholder="Disk Layout"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col7" data-column="7">
                 <td>OS Image</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col7_filter" placeholder="OS Image"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" class="clearFilter" data-column="5">
@@ -75,49 +75,53 @@
               <td>
                 <button class="ui red button" onclick="clearFields()">Clear</button>
               </td>
-            </tr>            
+            </tr>
           </div>
-        </tbody>       
+        </tbody>
       </div>
     </table>
 
   </div>
-<table id="table" class="ui striped green sortable selectable small table">
-  <thead>
-    <tr>
-      <th class="two wide sorted ascending">Name</th>
-      <th class="two wide">IP Address</th>
-      <th class="two wide">Product Name</th>
-      <th class="two wide">Role</th>
-      <th class="two wide">Data Center</th>
-      <th class="two wide">Notes</th>
-      <th class="two wide">Disk Layout</th>
-      <th class="two wide">OS Image</th>
-  </tr></thead>
-  <tbody>
-    <%
-    var i = 0;
-    FQDN.forEach(function(FQDN){ %>
-    <tr>
-      <td><%= FQDN %></td>
-      <td><%= NGIP[i] %></td>
-      <td><%= PRODUCT_NAME[i] %></td>
-      <td><%= ROLE[i] %></td>
-      <td><%= DC[i] %></td>
-      <td><%= NOTES[i] %></td>
-      <td><%= DISK[i] %></td>
-      <td><%= OSIMAGE[i] %></td>
-    </tr>
-    <%
-      i++;
-    }); %>
-  </tbody>
-</table>  <!-- 
-  <!-- 
+<div style="overflow: scroll;">
+  <table id="table" class="ui striped green sortable selectable small table">
+    <thead>
+      <tr>
+        <th class="two wide sorted ascending">Name</th>
+        <th class="two wide">IP Address</th>
+        <th class="two wide">Product Name</th>
+        <th class="two wide">Role</th>
+        <th class="two wide">Data Center</th>
+        <th class="two wide">Notes</th>
+        <th class="two wide">Disk Layout</th>
+        <th class="two wide">OS Image</th>
+    </tr></thead>
+    <tbody>
+      <%
+      var i = 0;
+      FQDN.forEach(function(FQDN){ %>
+      <tr>
+        <td><%= FQDN %></td>
+        <td><%= NGIP[i] %></td>
+        <td><%= PRODUCT_NAME[i] %></td>
+        <td><%= ROLE[i] %></td>
+        <td><%= DC[i] %></td>
+        <td><%= NOTES[i] %></td>
+        <td><%= DISK[i] %></td>
+        <td><%= OSIMAGE[i] %></td>
+      </tr>
+      <%
+        i++;
+      }); %>
+    </tbody>
+  </table>
+</div>
+<!--
+  <!--
 <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script> -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/ip-address.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 </div>
 
 <% include partials/footer %>

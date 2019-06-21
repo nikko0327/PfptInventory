@@ -1,5 +1,5 @@
 <% include partials/header %>
-<div class="ui" style="overflow: scroll;">
+<div class="ui">
   <br>
   <br>
   <br>
@@ -11,7 +11,7 @@
                 <th>Target</th>
                 <th>Search text</th>
             </tr>
-        </thead>        
+        </thead>
       </div>
       <div>
         <tbody>
@@ -19,37 +19,37 @@
             <tr id="filter_global">
                 <td>Global search</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="global_filter" id="global_filter" placeholder="Search anything..."></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col1" data-column="0">
                 <td>Name</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col0_filter" placeholder="Name"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col2" data-column="1">
                 <td>State</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col1_filter" placeholder="State"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col3" data-column="2">
                 <td>Status</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col2_filter" placeholder="Status"></div></td>
-            </tr>           
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" data-column="5">
                 <td>Host CPU</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col5_filter" placeholder="Host CPU"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" data-column="5">
                 <td>IP Address</td>
                 <td align="center"><div class="ui mini input"><input type="text" class="column_filter" id="col5_filter" placeholder="IP Address"></div></td>
-            </tr>            
+            </tr>
           </div>
           <div>
             <tr id="filter_col6" class="clearFilter" data-column="5">
@@ -57,49 +57,53 @@
               <td>
                 <button class="ui red button" onclick="clearFields()">Clear</button>
               </td>
-            </tr>            
+            </tr>
           </div>
-        </tbody>       
+        </tbody>
       </div>
     </table>
 
   </div>
-<table id="table" class="ui striped green sortable selectable small table">
-  <thead>
-    <tr>
-      <th class="two wide sorted ascending">Name</th>
-      <th class="two wide">State</th>
-      <th class="two wide">Status</th>
-      <th class="two wide">Provisioned Space</th>
-      <th class="two wide">Used Space</th>
-      <th class="two wide">Host CPU</th>
-      <th class="two wide">Host Memory</th>
-      <th class="two wide">IP Address</th>
-  </tr></thead>
-  <tbody>
-    <%
-    var i = 0;
-    NAME.forEach(function(NAME){ %>
-    <tr>
-      <td><%= NAME %></td>
-      <td><%= STATE[i] %></td>
-      <td><%= STATUS[i] %></td>
-      <td><%= PROVISIONED_SPACE[i] %></td>
-      <td><%= USED_SPACE[i] %></td>
-      <td><%= HOST_CPU[i] %></td>
-      <td><%= HOST_MEM[i] %></td>
-      <td><%= IP_ADDRESS[i] %></td>
-    </tr>
-    <%
-      i++;
-    }); %>
-  </tbody>
-</table>  <!-- 
-  <!-- 
+<div style="overflow: scroll;">
+  <table id="table" class="ui striped green sortable selectable small table">
+    <thead>
+      <tr>
+        <th class="two wide sorted ascending">Name</th>
+        <th class="two wide">State</th>
+        <th class="two wide">Status</th>
+        <th class="two wide">Provisioned Space</th>
+        <th class="two wide">Used Space</th>
+        <th class="two wide">Host CPU</th>
+        <th class="two wide">Host Memory</th>
+        <th class="two wide">IP Address</th>
+    </tr></thead>
+    <tbody>
+      <%
+      var i = 0;
+      NAME.forEach(function(NAME){ %>
+      <tr>
+        <td><%= NAME %></td>
+        <td><%= STATE[i] %></td>
+        <td><%= STATUS[i] %></td>
+        <td><%= PROVISIONED_SPACE[i] %></td>
+        <td><%= USED_SPACE[i] %></td>
+        <td><%= HOST_CPU[i] %></td>
+        <td><%= HOST_MEM[i] %></td>
+        <td><%= IP_ADDRESS[i] %></td>
+      </tr>
+      <%
+        i++;
+      }); %>
+    </tbody>
+  </table>
+</div>
+<!--
+  <!--
 <script src="//rawgithub.com/stidges/jquery-searchable/master/dist/jquery.searchable-1.0.0.min.js"></script> -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.10.16/sorting/ip-address.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
 </div>
 
 <% include partials/footer %>

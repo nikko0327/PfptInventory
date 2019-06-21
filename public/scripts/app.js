@@ -16,7 +16,7 @@ function filterGlobal () {
         $('#global_smart').prop('checked')
     ).draw();
 }
- 
+
 function filterColumn ( i ) {
     $('#table').DataTable().column( i ).search(
         $('#col'+i+'_filter').val(),
@@ -24,14 +24,14 @@ function filterColumn ( i ) {
         $('#col'+i+'_smart').prop('checked')
     ).draw();
 }
- 
+
 $(document).ready(function() {
     $('#table').DataTable();
- 
+
     $('input.global_filter').on( 'keyup click', function () {
         filterGlobal();
     } );
- 
+
     $('input.column_filter').on( 'keyup click', function () {
         filterColumn( $(this).parents('tr').attr('data-column') );
     } );
