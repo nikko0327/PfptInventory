@@ -19,10 +19,10 @@
   "dependencies": {
     "babyparse": "^0.4.6",
     "bcrypt": "^1.0.3",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "connect-mongo": "^2.0.1",
     "ejs": "^2.6.1",
-    "express": "^4.16.3",
+    "express": "^4.18.2",
     "express-sanitizer": "^1.0.4",
     "express-session": "^1.15.6",
     "jquery-tablesort": "0.0.11",
